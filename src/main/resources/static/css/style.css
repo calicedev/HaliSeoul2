@@ -1,0 +1,77 @@
+@font-face {
+    src : url("../font/BenzinExtraBold.ttf");
+    font-family: "benzin";
+}
+body{
+    background-color:#f8f3ed;
+    font-family: "benzin";
+}
+.top-title{
+    text-align: left;
+}
+li{
+    list-style: none;
+}
+a{
+    text-decoration: none;
+}
+.wrapper{
+    width: 1170px;
+    margin: 0 auto;
+}
+.clearfix{
+    content: '';
+    display: block;
+    clear: both;
+}
+header{
+    height:130px;
+    border-bottom: 0.5px solid black;
+    position: fixed;
+    width: 100%;
+    z-index: 9999;
+    top:0;
+    left:0;
+}
+
+h1{
+    color: black;
+    line-height: 100px;
+    float: left;
+}
+.menu{
+    float: right;
+}
+.menu li{
+    float: left;
+}
+.menu a{
+    line-height: 100px;
+    color: black;
+    padding: 0 15px;
+    display: block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+}
+
+.dropdown-content a {
+    line-height: 50px;
+    color: black;
+    padding: 5px 8px;
+    text-decoration: none;
+    display: block;
+    text-align: center;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.show {display:block;}
+
+.main{
+    text-align: left;
+}
