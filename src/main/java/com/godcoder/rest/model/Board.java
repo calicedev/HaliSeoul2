@@ -4,6 +4,7 @@ import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.List;
 
 @Entity
 @Data
@@ -20,4 +21,7 @@ public class Board {
     @JoinColumn(name = "user_id" , referencedColumnName = "id")
     @JsonIgnore
     private User user;
+
+    @OneToMany(mappedBy = "board")
+    private List<Reply> reply;
 }

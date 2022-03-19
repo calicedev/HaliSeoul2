@@ -3,6 +3,7 @@ package com.godcoder.rest.controller;
 import com.godcoder.rest.model.Board;
 import com.godcoder.rest.repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.StringUtils;
 
@@ -55,7 +56,6 @@ class BoardApiController {
                     return repository.save(newBoard);
                 });
     }
-
     @DeleteMapping("/boards/{id}")
     void deleteBoard(@PathVariable Long id) {
         repository.deleteById(id);

@@ -68,4 +68,11 @@ public class BoardController {
         boardService.save(username, board);
         return "redirect:/board/list"; //리다이렉트 하면서 재업데이트 하는 과정
     }
+
+//    @PostMapping("/board/comment/write")
+//    private String insertComment(@RequestParam("idx") int idx, @RequestParam("content") String content) throws Exception{
+//
+//    }
+
+
 }
