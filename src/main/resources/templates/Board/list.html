@@ -3,37 +3,24 @@
 <head th:fragment="head(title)">
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
     <link href="starter-template.css" th:href="@{/starter-template.css}" rel="stylesheet">
-
-    <title th:text="${title}">Hello, Spring Boot!</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body>
-<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top" th:fragment="menu(menu)">
-    <a class="navbar-brand" href="#">Spring Boot Tutorial</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-            aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item" th:classappend="${menu} == 'home'? 'active'">
-                <a class="nav-link" href="#" th:href="@{/}">홈 <span class="sr-only" th:if="${menu} == 'home'">(current)</span></a>
-            </li>
-            <li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
-                <a class="nav-link" href="#" th:href="@{/board/list}">게시판 <span class="sr-only" th:if="${menu} == 'board'">(current)</span></a>
-            </li>
-        </ul>
-    </div>
 
+<body>
+<nav th:replace ="fragments/common :: menu('board')">
 </nav>
+<br>
+<br>
+<br><br><br><br>
+
+
 <div class="container">
     <h2>게시판</h2>
-    <div>스프링 게시판입니다. </div>
+
     <div>총건수: <span th:text="${boards.totalElements}"></span>
         <form class="form-inline d-flex justify-content-end" method="GET" th:action="@{/board/list}">
             <div class="form-group mx-sm-3 mb-2">

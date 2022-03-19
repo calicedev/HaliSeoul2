@@ -22,6 +22,4 @@ public class Board {
     @JsonIgnore
     private User user;
 
-    @OneToMany(mappedBy = "board")
-    private List<Reply> reply;
 }
