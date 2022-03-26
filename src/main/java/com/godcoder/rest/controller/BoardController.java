@@ -44,6 +44,10 @@ public class BoardController {
         model.addAttribute("boards", boards);
         return "board/list";
     }
+    @GetMapping("/contact")
+    public String contact() {
+        return "board/contact";
+    }
 
     @GetMapping("/form")
     public String form(Model model,@RequestParam(required = false) Long id) {

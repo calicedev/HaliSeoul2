@@ -8,30 +8,55 @@
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
         integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-  <link rel="stylesheet" href="../css/style.css">
   <title th:text="${title}">Hello, Spring Boot!</title>
+<style>
+  body{
+    padding-top: 7rem;
+  }
+  .starter-template{
+    padding: 3rem 1.5rem;
+    text-align: center;
+  }
+</style>
+
 </head>
 <body>
+
 <nav class="wrapper" th:fragment="menu(menu)">
   <div>
     <h1>HARI SEOUL</h1>
     <ul class="menu">
       <li th:classappend="${menu} == 'home'? 'active'">
         <a  href="#" th:href="@{/}" >HOME</a></li>
-      <li><a href="#">매물</a></li>
+
+      <li><a href="javascript:void(0)" class="dropbtn" onclick="myFunction()">매물</a>
+        <div class="dropdown-content" id="myDropdown">
+          <a href="#">원룸</a>
+          <a href="#">투룸</a>
+          <a href="#">오피스텔</a>
+          <a href="lodging.html">하숙</a>
+          <a href="ma.html">기숙사</a>
+          <a href="public.html">정부 주택 관련 정보</a>
+        </div>
+      </li>
+
       <li class="nav-item" th:classappend="${menu} == 'board'? 'active'">
         <a href="#" th:href="@{/board/list}">커뮤니티 <span th:if="${menu} == 'board'"></span></a></li>
-      <li><a>CONTACT</a></li>
+
+      <li><a href="#" th:href="@{/board/contact}">CONTACT</a></li>
+
       <li><a th:href="@{/account/login}" sec:authorize="!isAuthenticated()">LOGIN</a></li>
       <li><a th:href="@{/account/register}" sec:authorize="!isAuthenticated()">회원가입</a></li>
       <li>
-        <form th:action="@{/logout}" method="POST" sec:authorize="isAuthenticated()">
-          <button type="submit">Logout</button>
+        <form th:action="@{/logout}" id="frm" method="POST" sec:authorize="isAuthenticated()">
+          <button class="btn" style="margin-top: 30px" type="submit">LOGOUT</button>
         </form>
       </li>
     </ul>
   </div>
 
 </nav>
+<script type="text/javascript" src="../../static/css/js/dropbar.js"></script>
 </body>
+
 </html>

@@ -8,9 +8,18 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-    <link href="starter-template.css" th:href="@{/starter-template.css}" rel="stylesheet">
+<!--    <link href="starter-template.css" th:href="@{/starter-template.css}" rel="stylesheet">-->
     <link rel="stylesheet" href="../css/style.css">
     <title th:text="${title}">Hello, Spring Boot!</title>
+    <style>
+        body{
+            padding-top: 3rem;
+        }
+        .starter-template{
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
@@ -42,11 +51,43 @@
             </div>
         </div>
         <div class ="text-right">
-            <a type="button" class="btn btn-primary" th:href="@{/board/list}">취소</a>
-            <button type="button" class="btn btn-primary" th:onclick="|deleteBoard(*{id})|">삭제</button>
-            <button type="submit" class="btn btn-primary">확인</button>
+            <a type="button" class="btn btn-dark" th:href="@{/board/list}">취소</a>
+            <button type="button" class="btn btn-dark" th:onclick="|deleteBoard(*{id})|">삭제</button>
+            <button type="submit" class="btn btn-dark">확인</button>
         </div>
     </form>
+    <div class="card mb-2 mt-5">
+
+        <div class="card-header bg-light">
+            <i class="fa fa-comment fa"></i> 댓글
+        </div>
+        <form>
+            <div class="card-body">
+                <input type="hidden" id="boardId" th:value="${board.id}">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <textarea class="form-control" id="reply-content" rows="1"></textarea>
+                        <button id="reply-btn-save" type="button" class="btn btn-dark mt-3">등록</button>
+                    </li>
+                </ul>
+            </div>
+        </form>
+    </div>
+    <br/>
+    <div class="card">
+        <div class="card-header">댓글</div>
+        <ul id="reply--box" class="list-group" th:each="reply : ${board.replyList}">
+            <li class="list-group-item d-flex justify-content-between">
+                <div th:text="${reply.getContent()}"></div>
+                <div class="d-flex">
+                    <!--                    <span class="text-monospace mr-1">작성자: &nbsp;</span><div class="text-monospace mr-1" th:text="${reply.user.username}"></div>-->
+                    <button class="badge badge-dark">대댓글</button><span> | </span>
+                    <button class="badge badge-dark">수정</button><span> | </span>
+                    <button id="delete"  class="badge badge-dark" style="margin-left: 10px;">삭제</button>
+                </div>
+            </li>
+        </ul>
+    </div>
 
 </div>
 
@@ -74,6 +115,54 @@
         })
 
     }
+
+    let replyIndex = {
+        init: function () {
+            $("#reply-btn-save").on("click", () => {
+                this.replySave();
+            });
+            $("#delete").on("click", () => {
+                this.replyDelete();
+            });
+        },
+
+        replySave: function () {
+            const data = {
+                boardId : $("#boardId").val(),
+                content: $("#reply-content").val(),
+            }
+            console.log((data.boardId)*1);
+            var urls="/board/form/2";
+            $.ajax({
+                type: "POST",
+                url: urls,
+                data: data,
+                // contentType: "application/json; charset=utf-8",
+                dataType: "text"
+
+            }).done(function (res) {
+                console.log(res)
+                location.href = `/board/form?id=${data.boardId}`;
+            }).fail(function (err) {
+                console.log(JSON.stringify(err));
+            });
+        },
+
+        replyDelete: function (boardId, replyId) {
+            $.ajax({
+                type: "DELETE",
+                url: "/board/form/delete",
+                dataType: "text"
+            }).done(function (res) {
+                alert("댓글삭제가 완료되었습니다.");
+                location.href = `/board/form?id=${data.boardId}`;
+            }).fail(function (err) {
+                alert(JSON.stringify(err));
+            });
+        },
+
+    }
+    replyIndex.init();
 
 </script>
 </body>

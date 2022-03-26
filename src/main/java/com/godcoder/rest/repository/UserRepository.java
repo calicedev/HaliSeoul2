@@ -9,9 +9,9 @@ import java.util.List;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 
- @EntityGraph(attributePaths = {"members"})
+ @EntityGraph(attributePaths = {"boards"})
  List<User> findAll();
 
  User findByUsername(String username);
-
+ String existsByUsername(String username);
 }

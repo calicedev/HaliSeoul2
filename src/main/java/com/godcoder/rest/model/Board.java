@@ -1,5 +1,6 @@
 package com.godcoder.rest.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -22,4 +23,7 @@ public class Board {
     @JsonIgnore
     private User user;
 
+    @JsonIgnoreProperties({"board"})
+    @OneToMany(mappedBy = "board", fetch = FetchType.EAGER)
+    private List<Reply> replyList;
 }
