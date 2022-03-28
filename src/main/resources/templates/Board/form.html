@@ -8,7 +8,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
           integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<!--    <link href="starter-template.css" th:href="@{/starter-template.css}" rel="stylesheet">-->
+    <!--    <link href="starter-template.css" th:href="@{/starter-template.css}" rel="stylesheet">-->
     <link rel="stylesheet" href="../css/style.css">
     <title th:text="${title}">Hello, Spring Boot!</title>
     <style>
@@ -56,6 +56,23 @@
             <button type="submit" class="btn btn-dark">확인</button>
         </div>
     </form>
+
+    <br/>
+    <div class="card">
+        <div class="card-header">댓글</div>
+        <ul id="reply--box" class="list-group" th:each="reply : ${board.replyList}">
+            <li class="list-group-item d-flex justify-content-between">
+                <div th:text="${reply.getContent()}"></div>
+                <div class="d-flex">
+                    <!--                    <span class="text-monospace mr-1">작성자: &nbsp;</span><div class="text-monospace mr-1" th:text="${reply.user.username}"></div>-->
+                    <button class="badge badge-dark">대댓글</button><span> | </span>
+                    <button class="badge badge-dark">수정</button><span> | </span>
+                    <button id="delete"  class="badge badge-dark" style="margin-left: 10px;">삭제</button>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <br>
     <div class="card mb-2 mt-5">
 
         <div class="card-header bg-light">
@@ -73,22 +90,10 @@
             </div>
         </form>
     </div>
-    <br/>
-    <div class="card">
-        <div class="card-header">댓글</div>
-        <ul id="reply--box" class="list-group" th:each="reply : ${board.replyList}">
-            <li class="list-group-item d-flex justify-content-between">
-                <div th:text="${reply.getContent()}"></div>
-                <div class="d-flex">
-                    <!--                    <span class="text-monospace mr-1">작성자: &nbsp;</span><div class="text-monospace mr-1" th:text="${reply.user.username}"></div>-->
-                    <button class="badge badge-dark">대댓글</button><span> | </span>
-                    <button class="badge badge-dark">수정</button><span> | </span>
-                    <button id="delete"  class="badge badge-dark" style="margin-left: 10px;">삭제</button>
-                </div>
-            </li>
-        </ul>
-    </div>
+    <br>
 
+    <br>
+    <br>
 </div>
 
 <!-- Optional JavaScript -->

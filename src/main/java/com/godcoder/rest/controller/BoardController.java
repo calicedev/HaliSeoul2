@@ -48,6 +48,34 @@ public class BoardController {
     public String contact() {
         return "board/contact";
     }
+    @GetMapping("/oneroom")
+    public String oneroom() {
+        return "board/oneroom";
+    }
+
+    @GetMapping("/tworoom")
+    public String tworoom() {
+        return "board/tworoom";
+    }
+
+    @GetMapping("/office")
+    public String office() {
+        return "board/office";
+    }
+
+    @GetMapping("/lodging")
+    public String lodging() {
+        return "board/lodging";
+    }
+
+    @GetMapping("/ma")
+    public String ma() {
+        return "board/ma";
+    }
+    @GetMapping("/information")
+    public String information() {
+        return "board/information";
+    }
 
     @GetMapping("/form")
     public String form(Model model,@RequestParam(required = false) Long id) {
