@@ -1,0 +1,83 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+
+    <script>
+        L_NO_TOUCH = false;
+        L_DISABLE_3D = false;
+    </script>
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.6.0/dist/leaflet.css"/>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+
+    <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <style>
+
+        path:hover{
+            cursor:pointer;
+        }
+    </style>
+</head>
+
+<body>
+<header style="background-color:#f8f3ed; margin-top: 3rem">
+    <nav th:replace="fragments/common :: menu('home')"></nav></header>
+<br><br><br><br><br><br><br><br>
+<div style="position:absolute; top:200px; left:60px;">
+    <h2 ><a href="https://www.lh.or.kr/contents/cont.do?sCode=user&mPid=231&mId=232&menuYear">행복주택</a></h2>
+    <p>대학생, 신혼부부, 청년 등을 위해 직장과 학교가 가까운 곳이나 대중교통이 편리한 곳에 짓는 임대료가 저렴한 공공 임대주택이다. <br>
+        젊은 세대의 주거 안정 및 주거복지 향상을 목적으로 공급물량의 80%는 신혼부부, 청년, 대학생 등 사회적 활동이 왕성한 젊은 계층(20%는 노인·취약계층)에 공급한다. <br>주택은 학업과 업무에 집중할 수 있는 실용적인 공간과 문화와
+        <br> 여가를 즐길 수 있는 복합단지로 조성된다.<br>
+        &nbsp- 임대기간 : 최대 6년(거주 중 취업·취업·결혼시 최대 10년)<br>
+        &nbsp- 전용면적 : 전용 45㎡이하<br>
+        &nbsp- 임대조건 : 보증금과 임대료(주변시세의 60~80%)<br>
+        &nbsp- 입주자격 : 대학생, 취업준비생, 청년(만19~39세), 사회초년생<br>
+        &nbsp- 소득 및 자산기준 : 소득(약 540만 원~620만 원/3~4인 기준), 자산(2,300만 원~7,500만 원, 자동차 유무 등)</p><br>
+    <h2><a href="https://www.lh.or.kr/contents/cont.do?sCode=user&mPid=231&mId=233&menuYear=">청년 매입임대주택</a></h2>
+    <p>도심 내 기존주택을 매입 후 개보수해 저소득층 청년에게 저렴하게 재임대한다. 대학(원)생 또는 만 19~39세이면서 전년도 도시근로자 월평균소득 100% 이하인 미혼 무주택 청년은 누구나 신청할 수 있다.<br>
+        &nbsp- 임대조건 : (보증금)100만 원~200만 원, (월 임대료)시세 40% 수준(3~4순위는 시중 시세 50% 수준)<br>
+        &nbsp- 임대기간 : 최초 2년, 2년 단위 2회 재계약 가능(최대 6년 거주)</p><br>
+    <h2><a href="https://www.lh.or.kr/contents/cont.do">전세임대주택</a></h2>
+    <p> 도심 내 최저소득계층이 현 생활권에서 거주할 수 있도록 기존주택에 대해 전세계약을 체결한 후 저렴하게 재임대한다. <br/>대학(원)생 또는 만 19~39세이면서 전년도 도시근로자 월평균소득 100% 이하인 미혼 무주택 청년은 누구나 신청할 수 있다.<br>
+        &nbsp- 전세금지원 한도액 : 수도권 1억2,000만 원, 광역시 9,500만 원, 기타지역 8,500만 원<br>
+        &nbsp- 임대조건 : (본인 부담 보증금)100만 원~200만 원, (월임대료)전세지원금 중 본인부담 보증금 제외한 금액에 대한 연 1~2% 이내 해당액<br>
+        &nbsp- 임대기간 : 최초 2년, 2년 단위 2회 재계약 가능(최대 6년 거주)</p><br>
+    <h2><a href="https://www.lh.or.kr/contents/cont.do">기숙사형 청년주택</a></h2>
+    <p>대학생 기숙사 확충을 위해 대학 인근의 다세대·다가구주택 또는 오피스텔을 매입해 기숙사로 운영하는 주택이다. <br>대학(원)생 또는 만 19~39세이면서 전년도 도시근로자 월평균소득 100% 이하인 미혼 무주택 청년은 누구나 신청할 수 있다.
+        <br>시세 50% 이하로 저렴하게 임대된다.<br>
+
+        &nbsp- 임대기간 : 최초 2년, 2년 단위 2회 재계약 가능(최대 6년 거주)<br>
+        &nbsp- 임대조건 : 보증금 평균 43만 원, 월 임대료 평균 29만 원</p><br>
+</div>
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymousdf"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+
+</body>
+
+
+
+</html>
